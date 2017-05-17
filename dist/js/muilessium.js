@@ -8095,11 +8095,26 @@ function lastOfList(list) {
 
 // For Each
 // --------
+// Executes callback function for every item in the list.
 
 function forEach(list, callback) {
-    return [].forEach.call(list, function (item, index) {
-        callback(item, index, list);
-    });
+    var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+    if (delay > 0) {
+        var counter = 0;
+
+        return [].forEach.call(list, function (item, index) {
+            setTimeout(function () {
+                callback(item, index, list);
+            }, delay * counter);
+
+            counter++;
+        });
+    } else {
+        return [].forEach.call(list, function (item, index) {
+            callback(item, index, list);
+        });
+    }
 };
 
 },{"../utils/classes":38,"../utils/focus-and-click":40,"../utils/scroll":41,"imagesloaded":3}],43:[function(require,module,exports){
