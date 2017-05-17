@@ -3196,7 +3196,6 @@ mark {
 }
 .mui-page-header {
   position: relative;
-  overflow: hidden;
   max-height: 4rem;
   background: #FFFFFF;
 }
