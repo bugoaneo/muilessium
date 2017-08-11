@@ -1370,7 +1370,7 @@ a:focus {
 a:visited {
   color: #383838;
 }
-a:empty:after {
+a:empty::after {
   content: attr(href);
 }
 :focus {
@@ -1948,7 +1948,7 @@ h6,
 .mui-badge.-rounded {
   border-radius: .6em;
 }
-.mui-badge.-new:after {
+.mui-badge.-new::after {
   content: ' new';
 }
 .mui-blockquote {
@@ -1963,10 +1963,10 @@ h6,
   font-weight: 600;
   text-align: center;
 }
-.mui-blockquote .text:before {
+.mui-blockquote .text::before {
   content: '\201C';
 }
-.mui-blockquote .text:after {
+.mui-blockquote .text::after {
   content: '\201D';
 }
 .mui-blockquote .author {
@@ -1994,7 +1994,7 @@ h6,
 .mui-breadcrumb > .link:focus {
   color: #C6C6C6;
 }
-.mui-breadcrumb.-slash-delimiter > .link:not(:last-of-type):after {
+.mui-breadcrumb.-slash-delimiter > .link:not(:last-of-type)::after {
   content: '/';
 }
 .mui-button-dropdown {
@@ -2009,10 +2009,9 @@ h6,
   pointer-events: none;
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -0.72rem;
   transform: translateY(80%);
   width: 100%;
-  z-index: 11;
   transition: all 210ms cubic-bezier(0.53, 0.05, 0.13, 0.94);
 }
 .mui-button-dropdown.-opened > .mui-button {
@@ -2064,7 +2063,7 @@ h6,
 .mui-button-group.-or > .mui-button:not(:first-of-type) {
   padding-left: 1.2rem;
 }
-.mui-button-group.-or > .mui-button:not(:first-of-type):before {
+.mui-button-group.-or > .mui-button:not(:first-of-type)::before {
   content: 'or';
   position: absolute;
   left: -0.6rem;
@@ -2365,7 +2364,7 @@ h6,
 .mui-carousel-indicators > .indicator:hover:after {
   background: #FFFFFF;
 }
-.mui-carousel-indicators > .indicator:after {
+.mui-carousel-indicators > .indicator::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -2377,7 +2376,7 @@ h6,
   border-radius: 50%;
   transition: all 210ms cubic-bezier(0.53, 0.05, 0.13, 0.94);
 }
-.mui-carousel-indicators > .indicator.-active:after {
+.mui-carousel-indicators > .indicator.-active::after {
   background: rgba(255, 255, 255, 0.5);
 }
 .mui-carousel-indicators > .indicator.-active:hover:after,
@@ -2441,8 +2440,8 @@ h6,
   overflow: hidden;
   transition: all 210ms cubic-bezier(0.53, 0.05, 0.13, 0.94);
 }
-.mui-checkbox.-toggle > label > .icon:before,
-.mui-checkbox.-toggle > label > .icon:after {
+.mui-checkbox.-toggle > label > .icon::before,
+.mui-checkbox.-toggle > label > .icon::after {
   display: block;
   position: absolute;
   top: -1px;
@@ -2458,20 +2457,20 @@ h6,
   border-radius: 0.2rem;
   transition: all 210ms cubic-bezier(0.53, 0.05, 0.13, 0.94);
 }
-.mui-checkbox.-toggle > label > .icon:before {
+.mui-checkbox.-toggle > label > .icon::before {
   content: 'off';
 }
-.mui-checkbox.-toggle > label > .icon:after {
+.mui-checkbox.-toggle > label > .icon::after {
   content: 'on';
   opacity: 0;
 }
-.mui-checkbox.-toggle.-checked > label > .icon:before,
-.mui-checkbox.-toggle.-checked > label > .icon:after {
+.mui-checkbox.-toggle.-checked > label > .icon::before,
+.mui-checkbox.-toggle.-checked > label > .icon::after {
   left: calc(100% -  2rem );
   background: #000000;
   color: #FFFFFF;
 }
-.mui-checkbox.-toggle.-checked > label > .icon:after {
+.mui-checkbox.-toggle.-checked > label > .icon::after {
   opacity: 1;
 }
 .mui-collection {
@@ -2523,22 +2522,50 @@ h6,
       flex: 1 0 auto;
 }
 .mui-dropdown-options {
+  z-index: 11;
   position: relative;
   width: 100%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3) !important;
+}
+.mui-dropdown-options::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 1rem;
+  width: 1rem;
+  transform: translateX(-50%) translateY(calc(-49%)) rotate(45deg);
+  z-index: -1;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3) !important;
+}
+.mui-dropdown-options > .wrapper {
+  position: relative;
   padding: 1rem;
-  list-style: none;
-  background: #FFFFFF;
   text-align: left;
   border-radius: 0.2rem;
+  background: #FFFFFF;
 }
-.mui-dropdown-options > .option {
+.mui-dropdown-options > .wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 1rem;
+  width: 1rem;
+  transform: translateX(-50%) translateY(calc(-49%)) rotate(45deg);
+}
+.mui-dropdown-options > .wrapper::after {
+  z-index: 1;
+  background: #FFFFFF;
+}
+.mui-dropdown-options > .wrapper > .option {
   cursor: pointer;
 }
-.mui-dropdown-options > .option:hover,
-.mui-dropdown-options > .option:focus {
+.mui-dropdown-options > .wrapper > .option:hover,
+.mui-dropdown-options > .wrapper > .option:focus {
   color: #6D6D6D;
 }
-.mui-dropdown-options > .option > .link {
+.mui-dropdown-options > .wrapper > .option > .link {
   text-decoration: none;
 }
 .mui-hero-header {
@@ -3197,8 +3224,8 @@ mark {
 .mui-radio > label:focus > .icon {
   border-color: #000000;
 }
-.mui-radio > label:hover > .icon:after,
-.mui-radio > label:focus > .icon:after {
+.mui-radio > label:hover > .icon::after,
+.mui-radio > label:focus > .icon::after {
   background: #000000;
 }
 .mui-radio > label > .icon {
@@ -3211,7 +3238,7 @@ mark {
   border: 1px solid #6D6D6D;
   border-radius: 50%;
 }
-.mui-radio > label > .icon:after {
+.mui-radio > label > .icon::after {
   content: '';
   display: block;
   position: absolute;
@@ -3225,7 +3252,7 @@ mark {
   opacity: 0;
   transition: all 210ms cubic-bezier(0.53, 0.05, 0.13, 0.94);
 }
-.mui-radio > input[type=radio]:checked + label > .icon:after {
+.mui-radio > input[type=radio]:checked + label > .icon::after {
   opacity: 1;
   height: 0.8rem;
   width: 0.8rem;
@@ -3305,7 +3332,7 @@ mark {
 .mui-ribbon.-bookmark.-right {
   right: 1rem;
 }
-.mui-ribbon.-bookmark:after {
+.mui-ribbon.-bookmark::after {
   content: '';
   position: absolute;
   bottom: calc( -50px  / 2 + .5px);
@@ -3381,7 +3408,7 @@ mark {
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  bottom: 0;
+  bottom: -0.72rem;
   left: 0;
   width: 100%;
   transform: translateY(80%);
